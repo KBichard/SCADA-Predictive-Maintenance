@@ -1,0 +1,27 @@
+
+# Python environment
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Raw and generated datasets
+data/
+
+# Generated model binaries
+*.joblib
+*.pkl
+
+# Local email testing software
+mailpit/
+
+# Credentials and local configuration
+.env
+.env.*
+*.pem
+*.key
+
+# IDE and operating system files
+.vscode/
+.DS_Store
+Thumbs.db

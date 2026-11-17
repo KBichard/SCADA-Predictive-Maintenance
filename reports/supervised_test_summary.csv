@@ -1,0 +1,2 @@
+model,roc_auc,average_precision,baseline_average_precision,precision,recall,f1,reference_alert_pct,july_available_windows,july_alert_windows,july_first_alert_lead_hours
+Random Forest,0.016019448737764036,0.007300920692711813,0.014220416455053326,0.0,0.0,0.0,14.992272024729521,168,0,

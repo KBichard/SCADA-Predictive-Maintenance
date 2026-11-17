@@ -1,0 +1,5 @@
+event_id,pre_failure_windows,pre_failure_coverage_pct,pre_failure_alerts,first_alert_lead_hours,failure_windows,failure_detection_pct
+1,203,70.48611111111111,0,,251,0.0
+2,202,70.13888888888889,0,,79,10.126582278481013
+3,288,100.0,0,,501,20.35928143712575
+4,168,58.333333333333336,0,,35,8.571428571428571

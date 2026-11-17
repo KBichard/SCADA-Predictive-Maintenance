@@ -1,0 +1,166 @@
+{
+  "name": "Compressor_01",
+  "tagType": "Folder",
+  "tags": [
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "Oil_Temperature",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "String",
+      "defaultValue": "INITIALIZING",
+      "name": "Alarm_Status",
+      "tagType": "AtomicTag",
+      "value": "INITIALIZING",
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Boolean",
+      "defaultValue": false,
+      "name": "Replay_Enabled",
+      "tagType": "AtomicTag",
+      "value": false,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": -1.0,
+      "name": "Anomaly_Score",
+      "tagType": "AtomicTag",
+      "value": -1.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "TP3",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Boolean",
+      "defaultValue": false,
+      "name": "Model_Ready",
+      "tagType": "AtomicTag",
+      "value": false,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "Reservoir_Pressure",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "H1",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "alarms": [
+        {
+          "displayPath": "Compressor 01",
+          "label": "Suspected Compressor Fault",
+          "mode": "WhenTrue",
+          "name": "ML_Compressor_Fault",
+          "notes": "SIMULATION - ML detected abnormal compressor behavior.",
+          "priority": "Critical"
+        }
+      ],
+      "dataType": "Boolean",
+      "defaultValue": false,
+      "eventScripts": [
+        {
+          "eventid": "alarmActive",
+          "script": "\n    if alarmName != \"ML_Compressor_Fault\":\n        return\n\n    base = \"[default]Compressor_01/\"\n\n    readings = system.tag.readBlocking([\n        base + \"Replay_Timestamp\",\n        base + \"Motor_Current\",\n        base + \"Oil_Temperature\",\n        base + \"Reservoir_Pressure\",\n        base + \"Anomaly_Score\"\n    ])\n\n    body = \"\"\"\nSIMULATED INDUSTRIAL MAINTENANCE ALERT\n\nEquipment: Compressor 01\nPriority: CRITICAL\nStatus: Suspected equipment fault\n\nHistorical timestamp: %s\nMotor current: %.2f A\nOil temperature: %.2f C\nReservoir pressure: %.2f bar\nAnomaly score: %.4f\nAlarm threshold: 0.7028\n\nRecommended action:\nInspect compressor for potential air leakage\nor abnormal operating conditions.\n\nDetection method: Isolation Forest\n\nThis is a simulated notification.\nNo physical equipment is connected.\n\"\"\" % (\n        readings[0].value,\n        readings[1].value,\n        readings[2].value,\n        readings[3].value,\n        readings[4].value\n    )\n\n    system.net.sendEmail(\n        smtp=\"127.0.0.1:1025\",\n        fromAddr=\"scada@example.com\",\n        to=[\"maintenance@example.com\"],\n        subject=\"[SIMULATION] CRITICAL - Compressor 01\",\n        body=body,\n        priority=\"1\"\n    )\t"
+        }
+      ],
+      "name": "Urgent_Alarm",
+      "tagType": "AtomicTag",
+      "value": false,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0,
+      "name": "Motor_Current",
+      "tagType": "AtomicTag",
+      "value": 0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "TP2",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Boolean",
+      "defaultValue": false,
+      "name": "Sensor_Ready",
+      "tagType": "AtomicTag",
+      "value": false,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "String",
+      "defaultValue": "",
+      "name": "Replay_Timestamp",
+      "tagType": "AtomicTag",
+      "value": "",
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "Failure_Risk",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Float8",
+      "defaultValue": 0.0,
+      "name": "DV_Pressure",
+      "tagType": "AtomicTag",
+      "value": 0.0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Int4",
+      "defaultValue": 0,
+      "name": "Replay_Index",
+      "tagType": "AtomicTag",
+      "value": 0,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "Boolean",
+      "defaultValue": false,
+      "name": "Motor_Running",
+      "tagType": "AtomicTag",
+      "value": false,
+      "valueSource": "memory"
+    },
+    {
+      "dataType": "String",
+      "defaultValue": "",
+      "name": "Sensor_Timestamp",
+      "tagType": "AtomicTag",
+      "value": "",
+      "valueSource": "memory"
+    }
+  ]
+}
